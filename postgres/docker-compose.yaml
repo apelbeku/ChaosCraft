@@ -1,0 +1,32 @@
+# default user and password
+# user: postgres
+# password: example
+# database: postgres
+# if you access directly from same container psql
+
+services:
+  db:
+    image: postgres
+    container_name: pg_container
+    restart: always
+    # set shared memory limit when using docker compose
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: example
+      # POSTGRES_USER: user
+      # POSTGRES_DATABASE: example_database
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # # Database management in single file PHP
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 8080:8080
+
+volumes:
+  pgdata:
+    name: pgdata_default
